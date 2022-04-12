@@ -1,0 +1,25 @@
+p{
+    color:red;
+}
+
+.formsContent{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.form{
+    border: 1px solid rgb(188, 187, 187);
+    width: 34%;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    
+    
+
+    
+}
+
+.formButton{
+    margin: 10px;
+}

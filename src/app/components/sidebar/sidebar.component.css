@@ -1,0 +1,10 @@
+a{
+
+    list-style: none;
+    text-decoration: none;
+    color: black;
+}
+
+.listItem{
+    border-bottom: 1px solid gray;
+}

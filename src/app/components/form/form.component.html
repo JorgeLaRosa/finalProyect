@@ -1,0 +1,22 @@
+<form [formGroup]="formulario" (ngSubmit)="sumar()">
+    <mat-form-field appearance="fill">
+        <mat-label>Documento</mat-label>
+        <input formControlName="dni" matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Nombre Completo</mat-label>
+        <input #nombre formControlName="nombre" matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Select</mat-label>
+        <mat-select formControlName="curso">
+            <mat-option value="angular">Angular</mat-option>
+            <mat-option value="React">React JS</mat-option>
+            <mat-option value="vue">Vue JS</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-button color="primary" type="submit">Inscribirse</button>
+</form>
