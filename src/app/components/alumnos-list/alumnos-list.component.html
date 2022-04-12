@@ -1,0 +1,110 @@
+<!-- <div *ngFor="let i of alumnos">
+    Nomnre: {{i.nombre}} Documento: {{i.dni}} curso: {{i.curso}}
+    <button (click)="eliminar(i.dni)">eliminar</button>
+</div> -->
+
+<h1 [appHeadersSize]="estilos">Lista de Alumnos Inscriptos</h1>
+
+<mat-table #tabla [dataSource]="alumnos" class="mat-elevation-z8">
+    <!-- Dni Column -->
+    <ng-container matColumnDef="dni">
+        <mat-header-cell *matHeaderCellDef> Documento No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dni}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+    </ng-container>
+
+    <!-- Curso Column -->
+    <ng-container matColumnDef="curso">
+        <mat-header-cell *matHeaderCellDef> Curso </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.curso}} </mat-cell>
+    </ng-container>
+
+    <!-- Eliminar Column -->
+    <ng-container matColumnDef="eliminar">
+        <mat-header-cell *matHeaderCellDef> Editar</mat-header-cell>
+        <mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
+                (click)="eliminar(element.dni)">eliminar</button></mat-cell>
+    </ng-container>
+
+    <!-- Editar Column -->
+    <ng-container matColumnDef="editar">
+        <mat-header-cell *matHeaderCellDef> Editar</mat-header-cell>
+        <mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
+                (click)="editar(element)">editar</button></mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<hr>
+<hr>
+<div class="formsContent">
+    <form class="form" [formGroup]="formulario" (ngSubmit)="sumar()">
+        <h2>Formulario Inscripcion</h2>
+        <mat-form-field appearance="fill">
+            <mat-label>Documento</mat-label>
+            <input formControlName="dni" matInput>
+            <mat-hint *ngIf="formulario.get('dni')?.errors?.['required']">*Campo Obligatorio</mat-hint>
+            <mat-hint *ngIf="formulario.get('dni')?.errors?.['minlength']">*Minimo 8 caracteres.</mat-hint>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre Completo</mat-label>
+            <input #nombre formControlName="nombre" matInput>
+            <mat-hint *ngIf="formulario.get('nombre')?.errors?.['required']">*Campo Obligatorio</mat-hint>
+        </mat-form-field>
+
+        <br>
+        <mat-form-field appearance="fill">
+
+            <mat-label>Select</mat-label>
+            <mat-select formControlName="curso">
+                <mat-option value="angular">Angular</mat-option>
+                <mat-option value="React">React JS</mat-option>
+                <mat-option value="vue">Vue JS</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="formulario.get('curso')?.errors?.['required']">*Campo Obligatorio</mat-hint>
+        </mat-form-field>
+
+        <br>
+        <button class="formButton" mat-button color="primary" type="submit">Inscribirse</button>
+    </form>
+
+
+    <form class="form" [formGroup]="newForm" (ngSubmit)="actualizar()">
+        <h2>Formulario Modificacion</h2>
+        <mat-form-field appearance="fill">
+            <mat-label>Documento</mat-label>
+            <input formControlName="dni" matInput>
+            <mat-hint *ngIf="newForm.get('dni')?.errors?.['required']">*Campo Obligatorio</mat-hint>
+            <mat-hint *ngIf="newForm.get('dni')?.errors?.['minlength']">Minimo 8 caracteres</mat-hint>
+            <!--   <mat-hint *ngIf="newForm.get('dni')?.errors?.['minlength']">*Minimo 8 caracteres.</mat-hint> -->
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre Completo</mat-label>
+            <input #nombre formControlName="nombre" matInput>
+            <mat-hint *ngIf="newForm.get('nombre')?.errors?.['required']">*Campo Obligatorio</mat-hint>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select formControlName="curso">
+                <mat-option value="angular">Angular</mat-option>
+                <mat-option value="React">React JS</mat-option>
+                <mat-option value="vue">Vue JS</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="newForm.get('curso')?.errors?.['required']">*Campo Obligatorio</mat-hint>
+        </mat-form-field>
+        <br>
+        <button class="formButton" mat-button color="primary" type="submit">Modificar</button>
+    </form>
+</div>
