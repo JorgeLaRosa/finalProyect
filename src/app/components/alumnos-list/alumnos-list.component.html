@@ -1,11 +1,6 @@
-<!-- <div *ngFor="let i of alumnos">
-    Nomnre: {{i.nombre}} Documento: {{i.dni}} curso: {{i.curso}}
-    <button (click)="eliminar(i.dni)">eliminar</button>
-</div> -->
-
 <h1 [appHeadersSize]="estilos">Lista de Alumnos Inscriptos</h1>
 
-<mat-table #tabla [dataSource]="alumnos" class="mat-elevation-z8">
+<mat-table #tabla [dataSource]="alumnosObservable" class="mat-elevation-z8">
     <!-- Dni Column -->
     <ng-container matColumnDef="dni">
         <mat-header-cell *matHeaderCellDef> Documento No. </mat-header-cell>
@@ -35,17 +30,32 @@
     <ng-container matColumnDef="editar">
         <mat-header-cell *matHeaderCellDef> Editar</mat-header-cell>
         <mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
-                (click)="editar(element)">editar</button></mat-cell>
+                (click)="abrirDialogEditar(true, element)">editar</button></mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+<button mat-stroked-button (click)="abrirDialogEditar(false, '')">Inscribirse</button>
 
 <hr>
-<hr>
+
+
+<!-- async json -->
+<h3>Observable con Pipe ASYNC (Filtrado por ID > 2)</h3>
+<div>{{studentsFiltered$ | async | json}}</div>
+
+<!-- Seccion de promesa -->
+
+<h3>Promesa desde Servicio</h3>
+<div *ngFor="let i of studentsP">{{i.nombre}} {{i.curso}} {{i.dni}}</div>
+
+
+
+<!-- Formulario -->
+<!-- <hr>
 <div class="formsContent">
-    <form class="form" [formGroup]="formulario" (ngSubmit)="sumar()">
+    <form class="form" [formGroup]="formulario">
         <h2>Formulario Inscripcion</h2>
         <mat-form-field appearance="fill">
             <mat-label>Documento</mat-label>
@@ -85,7 +95,7 @@
             <input formControlName="dni" matInput>
             <mat-hint *ngIf="newForm.get('dni')?.errors?.['required']">*Campo Obligatorio</mat-hint>
             <mat-hint *ngIf="newForm.get('dni')?.errors?.['minlength']">Minimo 8 caracteres</mat-hint>
-            <!--   <mat-hint *ngIf="newForm.get('dni')?.errors?.['minlength']">*Minimo 8 caracteres.</mat-hint> -->
+
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -107,4 +117,4 @@
         <br>
         <button class="formButton" mat-button color="primary" type="submit">Modificar</button>
     </form>
-</div>
+</div> -->

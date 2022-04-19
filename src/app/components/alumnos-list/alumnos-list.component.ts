@@ -1,8 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { SchoolServicesService } from '../../services/school-services.service';
 import { MatTable } from '@angular/material/table';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { compileNgModuleDeclarationExpression } from '@angular/compiler/src/render3/r3_module_compiler';
+import { Observable, Subscription } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { FormComponent } from '../form/form.component';
 
 
 export interface Student {
@@ -17,73 +19,119 @@ export interface Student {
   styleUrls: ['./alumnos-list.component.css']
 })
 
-export class AlumnosListComponent implements OnInit {
+export class AlumnosListComponent implements OnInit, OnDestroy {
 
   @ViewChild('tabla') table?: MatTable<Student>
 
   alumnos: any[] = [];
-
+  dialogData: any;
+  alumnosObservable: any[] = [];
+  studentsPromise!: Promise<any[]>;
+  studentsP!: any[];
+  newStudent: any = {};
+  student: any = "";
+  suscripcion!: Subscription;
+  studentsFiltered$!: Observable<any>;
   displayedColumns: string[] = [
     "dni",
     "nombre",
     "curso",
     "eliminar",
     "editar"
-  ]
+  ];
+  //dataSource es la fuente del Mat Table
+  dataSource = this.alumnos;
+  dialogRef: any;
 
-  newStudent: any = {}
 
-  student: any = ""
+  constructor(
+    private studentsService: SchoolServicesService, public dialog: MatDialog) {
 
-  formulario: FormGroup = new FormGroup({
-    dni: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    nombre: new FormControl('', [Validators.required]),
-    curso: new FormControl('', [Validators.required]),
-  });
-
-  newForm: FormGroup = new FormGroup({
-    dni: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    nombre: new FormControl('', [Validators.required]),
-    curso: new FormControl('', [Validators.required]),
-  })
-
-  constructor(private students: SchoolServicesService) {
-    this.alumnos = this.students.retornar()
   }
 
+  ngOnInit(): void {
+    this.suscripcion = this.studentsService.retornarObservable().subscribe({
+      next: student => (this.alumnosObservable = student)
+    })
+
+    this.studentsFiltered$ = this.studentsService.retornarObservableFiltrado()
+    this.studentsFiltered$.subscribe()
+
+    this.studentsPromise = this.studentsService.retornar();
+    this.studentsPromise
+      .then(i => {
+        this.studentsP = i
+      })
+
+
+  }
+
+  eliminar(dni: any) {
+    this.studentsService.borrar(dni);
+    this.table?.renderRows();
+  }
+
+
+
+  sumar() {
+
+    console.log("suma uno")
+    //   console.log(this.formulario.value)
+    //   this.studentsService.agregar(this.formulario.value)
+    //   this.table?.renderRows();
+  }
+
+  actualizar() {
+    console.log("actualiza uno")
+    //this.studentsService.modificar(this.newForm.value)
+    this.table?.renderRows()
+  }
+
+  abrirDialogEditar(mode: boolean, element: any) {
+    const dialogRef = this.dialog.open(FormComponent, {
+      width: '400px',
+      data: {
+        nombre: element.nombre,
+        dni: element.dni,
+        curso: element.curso
+
+      }
+    })
+    dialogRef.afterClosed().subscribe((info: any) => {
+      this.dialogData = info
+    })
+    console.log(dialogRef)
+    // if (mode = true) {
+    //   this.sumar()
+    // } else {
+    //   this.actualizar()
+    // }
+
+  }
+
+  //Promise
+
+
+  abrirDialogInscripcion() {
+    const dialogRef = this.dialog.open(FormComponent, {
+      width: '400px',
+      data: {
+        nombre: '',
+        dni: '',
+        curso: ''
+      }
+    })
+  }
+
+  //estilo de Consigna
   estilos: any = {
     tamano: '20px'
   }
 
-  dataSource = this.alumnos;
-
-  eliminar(dni: any) {
-    this.students.borrar(dni);
-    this.table?.renderRows();
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe()
   }
 
-  sumar() {
-    console.log(this.formulario.value)
-    this.students.agregar(this.formulario.value)
-    this.table?.renderRows();
-  }
-
-  editar(curso: any) {
-    this.newForm.setValue({
-      dni: curso.dni,
-      nombre: curso.nombre,
-      curso: curso.curso
-    })
-
-  }
-
-  actualizar() {
-    this.students.modificar(this.newForm.value)
-    this.table?.renderRows()
-  }
-
-  ngOnInit(): void {
-  }
 }
 
 

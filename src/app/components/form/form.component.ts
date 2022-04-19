@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { SchoolServicesService } from '../../services/school-services.service';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, NgForm } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -13,24 +14,28 @@ export class FormComponent implements OnInit {
 
   newStudent: any = {}
   student: any = ""
+  formulario!: FormGroup;
+  mode!: boolean;
 
 
-  formulario: FormGroup = new FormGroup({
-    dni: new FormControl(''),
-    nombre: new FormControl(''),
-    curso: new FormControl(''),
-  });
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) data: any) {
+
+    this.formulario = this.fb.group({
+      dni: new FormControl(data.dni),
+      nombre: new FormControl(data.nombre),
+      curso: new FormControl(data.curso),
+
+    });
 
 
-  constructor(private students: SchoolServicesService) {
+
   }
 
   ngOnInit(): void {
   }
 
   sumar() {
-    console.log(this.formulario.value)
-    this.students.agregar(this.formulario.value)
+    this.dialogRef.close()
   }
 
 
