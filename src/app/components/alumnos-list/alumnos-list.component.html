@@ -10,7 +10,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <!-- Curso Column -->
@@ -23,7 +23,7 @@
     <ng-container matColumnDef="eliminar">
         <mat-header-cell *matHeaderCellDef> Editar</mat-header-cell>
         <mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
-                (click)="eliminar(element.dni)">eliminar</button></mat-cell>
+                (click)="deleteStudent(element.id)">eliminar</button></mat-cell>
     </ng-container>
 
     <!-- Editar Column -->
@@ -38,83 +38,12 @@
 </mat-table>
 <button mat-stroked-button (click)="abrirDialogEditar(false, '')">Inscribirse</button>
 
-<hr>
-
 
 <!-- async json -->
-<h3>Observable con Pipe ASYNC (Filtrado por ID > 2)</h3>
-<div>{{studentsFiltered$ | async | json}}</div>
+<!-- <h3>Observable con Pipe ASYNC (Filtrado por ID > 2)</h3>
+<div>{{studentsFiltered$ | async | json}}</div> -->
 
 <!-- Seccion de promesa -->
 
-<h3>Promesa desde Servicio</h3>
-<div *ngFor="let i of studentsP">{{i.nombre}} {{i.curso}} {{i.dni}}</div>
-
-
-
-<!-- Formulario -->
-<!-- <hr>
-<div class="formsContent">
-    <form class="form" [formGroup]="formulario">
-        <h2>Formulario Inscripcion</h2>
-        <mat-form-field appearance="fill">
-            <mat-label>Documento</mat-label>
-            <input formControlName="dni" matInput>
-            <mat-hint *ngIf="formulario.get('dni')?.errors?.['required']">*Campo Obligatorio</mat-hint>
-            <mat-hint *ngIf="formulario.get('dni')?.errors?.['minlength']">*Minimo 8 caracteres.</mat-hint>
-        </mat-form-field>
-        <br>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Nombre Completo</mat-label>
-            <input #nombre formControlName="nombre" matInput>
-            <mat-hint *ngIf="formulario.get('nombre')?.errors?.['required']">*Campo Obligatorio</mat-hint>
-        </mat-form-field>
-
-        <br>
-        <mat-form-field appearance="fill">
-
-            <mat-label>Select</mat-label>
-            <mat-select formControlName="curso">
-                <mat-option value="angular">Angular</mat-option>
-                <mat-option value="React">React JS</mat-option>
-                <mat-option value="vue">Vue JS</mat-option>
-            </mat-select>
-            <mat-hint *ngIf="formulario.get('curso')?.errors?.['required']">*Campo Obligatorio</mat-hint>
-        </mat-form-field>
-
-        <br>
-        <button class="formButton" mat-button color="primary" type="submit">Inscribirse</button>
-    </form>
-
-
-    <form class="form" [formGroup]="newForm" (ngSubmit)="actualizar()">
-        <h2>Formulario Modificacion</h2>
-        <mat-form-field appearance="fill">
-            <mat-label>Documento</mat-label>
-            <input formControlName="dni" matInput>
-            <mat-hint *ngIf="newForm.get('dni')?.errors?.['required']">*Campo Obligatorio</mat-hint>
-            <mat-hint *ngIf="newForm.get('dni')?.errors?.['minlength']">Minimo 8 caracteres</mat-hint>
-
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Nombre Completo</mat-label>
-            <input #nombre formControlName="nombre" matInput>
-            <mat-hint *ngIf="newForm.get('nombre')?.errors?.['required']">*Campo Obligatorio</mat-hint>
-        </mat-form-field>
-
-
-        <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
-            <mat-select formControlName="curso">
-                <mat-option value="angular">Angular</mat-option>
-                <mat-option value="React">React JS</mat-option>
-                <mat-option value="vue">Vue JS</mat-option>
-            </mat-select>
-            <mat-hint *ngIf="newForm.get('curso')?.errors?.['required']">*Campo Obligatorio</mat-hint>
-        </mat-form-field>
-        <br>
-        <button class="formButton" mat-button color="primary" type="submit">Modificar</button>
-    </form>
-</div> -->
+<!-- <h3>Promesa desde Servicio</h3>
+<div *ngFor="let i of studentsP">{{i.nombre}} {{i.curso}} {{i.dni}}</div> -->

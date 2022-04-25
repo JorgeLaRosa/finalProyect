@@ -1,0 +1,38 @@
+<form [formGroup]="newCourseForm" (ngSubmit)="createNewCourse()">
+    <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Subtitle</mat-label>
+        <input formControlName="subtitle" matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Duration</mat-label>
+        <input formControlName="duration" matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input formControlName="price" matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input formControlName="description" matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Students</mat-label>
+        <input formControlName="enrolledStudents" matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Capacidad de alumnos</mat-label>
+        <input formControlName="maxQuote" matInput>
+    </mat-form-field>
+    <br>
+    <button type="submit">Crear Curso</button>
+</form>

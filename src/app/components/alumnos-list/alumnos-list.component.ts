@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SchoolServicesService } from '../../services/school-services.service';
+import { SchoolZoomService } from '../../core/services/school-zoom.service';
 import { MatTable } from '@angular/material/table';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormComponent } from '../form/form.component';
@@ -45,45 +44,35 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private studentsService: SchoolServicesService, public dialog: MatDialog) {
-
-  }
+    private studentsService: SchoolZoomService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.suscripcion = this.studentsService.retornarObservable().subscribe({
-      next: student => (this.alumnosObservable = student)
-    })
+    this.suscripcion = this.studentsService.obtenerStudents().subscribe(
+      (data) => {
+        this.alumnosObservable = [];
+        data.forEach((i) => {
+          this.alumnosObservable.push(
+            {
+              id: i.payload.doc.id,
+              ...i.payload.doc.data()
 
-    this.studentsFiltered$ = this.studentsService.retornarObservableFiltrado()
-    this.studentsFiltered$.subscribe()
-
-    this.studentsPromise = this.studentsService.retornar();
-    this.studentsPromise
-      .then(i => {
-        this.studentsP = i
+            })
+        })
       })
-
-
   }
 
-  eliminar(dni: any) {
-    this.studentsService.borrar(dni);
+  createStudent(dialogData: any) {
+    this.studentsService.createNewStudent(dialogData);
     this.table?.renderRows();
   }
 
-
-
-  sumar() {
-
-    console.log("suma uno")
-    //   console.log(this.formulario.value)
-    //   this.studentsService.agregar(this.formulario.value)
-    //   this.table?.renderRows();
+  deleteStudent(studentId: string) {
+    this.studentsService.deleteSelectedStudent(studentId)
   }
 
-  actualizar() {
-    console.log("actualiza uno")
-    //this.studentsService.modificar(this.newForm.value)
+
+  actualizar(dialogData: any) {
+    this.studentsService.updateStudent(dialogData)
     this.table?.renderRows()
   }
 
@@ -91,26 +80,24 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(FormComponent, {
       width: '400px',
       data: {
-        nombre: element.nombre,
+        name: element.name,
         dni: element.dni,
-        curso: element.curso
+        curso: element.curso,
+        mode: mode,
+        id: element.id
+      },
 
+    });
+
+    dialogRef.afterClosed().subscribe(info => {
+      this.dialogData = info;
+      if (mode == false) {
+        this.createStudent(this.dialogData)
+      } else {
+        this.actualizar(this.dialogData)
       }
     })
-    dialogRef.afterClosed().subscribe((info: any) => {
-      this.dialogData = info
-    })
-    console.log(dialogRef)
-    // if (mode = true) {
-    //   this.sumar()
-    // } else {
-    //   this.actualizar()
-    // }
-
   }
-
-  //Promise
-
 
   abrirDialogInscripcion() {
     const dialogRef = this.dialog.open(FormComponent, {
@@ -118,7 +105,9 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
       data: {
         nombre: '',
         dni: '',
-        curso: ''
+        curso: '',
+
+
       }
     })
   }
@@ -131,7 +120,6 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.suscripcion.unsubscribe()
   }
-
 }
 
 

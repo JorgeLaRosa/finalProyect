@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { SchoolServicesService } from '../../services/school-services.service';
+import { SchoolServicesService } from '../../core/services/school-services.service';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -15,27 +15,34 @@ export class FormComponent implements OnInit {
   newStudent: any = {}
   student: any = ""
   formulario!: FormGroup;
-  mode!: boolean;
+  buttonLabel!: any;
+  id!: string
 
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) data: any) {
 
     this.formulario = this.fb.group({
       dni: new FormControl(data.dni),
-      nombre: new FormControl(data.nombre),
+      name: new FormControl(data.name),
       curso: new FormControl(data.curso),
+      id: data.id
 
     });
 
 
-
+    //ButtonValue
+    if (data.mode == true) {
+      this.buttonLabel = "Editar"
+    } else {
+      this.buttonLabel = "Inscribirse"
+    }
   }
 
   ngOnInit(): void {
   }
 
-  sumar() {
-    this.dialogRef.close()
+  sendForm() {
+    this.dialogRef.close(this.formulario.value)
   }
 
 

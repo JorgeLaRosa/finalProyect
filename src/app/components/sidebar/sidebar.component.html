@@ -1,10 +1,9 @@
 <mat-list>
+
     <mat-list-item class="listItem">Alumnos</mat-list-item>
-    <mat-list-item class="listItem"> <a href="#">Cursos</a> </mat-list-item>
-    <mat-list-item class="listItem"> <a href="#">Contacto</a> </mat-list-item>
-    <mat-list-item class="listItem"> <a href="#">Promociones</a> </mat-list-item>
-    <mat-list-item class="listItem"> <a href="#">Blog alumno</a> </mat-list-item>
-
-
+    <mat-list-item class="listItem"> <a [routerLink]="['/inscripcion']">inscripcion</a> </mat-list-item>
+    <mat-list-item class="listItem"> <a [routerLink]="['/courseCreator']">Cursos Creator</a> </mat-list-item>
+    <mat-list-item class="listItem"> <a [routerLink]="['/alumnos']">Alumnos</a> </mat-list-item>
+    <mat-list-item class="listItem"> <a [routerLink]="['/cursos']">Cursos</a> </mat-list-item>
 
 </mat-list>

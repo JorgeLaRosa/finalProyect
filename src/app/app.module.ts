@@ -1,17 +1,29 @@
+// Modulos
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CoreModule } from './core/core.module'
+import { AppRoutingModule } from './core/app-routing.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
+
+
+
+
+
+
+// Componentes
+import { AlumnosListComponent } from './components/alumnos-list/alumnos-list.component';
+
+import { CursosComponent } from './components/cursos/cursos.component';
+import { FormComponent } from './components/form/form.component';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MaterialModule } from './material/material.module';
-import { FormComponent } from './components/form/form.component';
-import { SchoolServicesService } from './services/school-services.service';
-import { AlumnosListComponent } from './components/alumnos-list/alumnos-list.component';
-import { HeadersSizeDirective } from './directives/headers-size.directive';
+import { CoursesCreatorComponent } from './components/courses-creator/courses-creator.component';
+
+import { InscriptionComponent } from './components/inscription/inscription.component';
+
 
 
 @NgModule({
@@ -21,17 +33,22 @@ import { HeadersSizeDirective } from './directives/headers-size.directive';
     SidebarComponent,
     ToolbarComponent,
     AlumnosListComponent,
-    HeadersSizeDirective,
+    CursosComponent,
+    CoursesCreatorComponent,
+    InscriptionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
+
+
   ],
-  providers: [SchoolServicesService],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
