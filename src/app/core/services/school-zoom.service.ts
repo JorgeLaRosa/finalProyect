@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { filter, Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { CdkNoDataRow } from '@angular/cdk/table';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,10 @@ export class SchoolZoomService {
   public students!: any[];
   private studentObservable: Observable<any[]>;
   private coursesObservable: Observable<any[]>;
+  private student!: AngularFirestoreDocument<any>;
 
 
-  constructor(public firestore: AngularFirestore) {
+  constructor(public firestore: AngularFirestore,) {
 
     this.studentObservable = firestore.collection('students').snapshotChanges();
 
@@ -32,14 +34,13 @@ export class SchoolZoomService {
   }
 
   updateStudent(studentData: any) {
-    //var index = studentData.indexOf(studentData.id)
+    delete studentData.id
     this.firestore.collection('students').doc(studentData.id).update(studentData)
   }
 
   // COURSES Services
 
   getCourses() {
-    console.log(this.coursesObservable)
     return this.coursesObservable
   }
 
@@ -56,4 +57,12 @@ export class SchoolZoomService {
       curso: [data.courseId]
     })
   }
+
+
+  //Perfil Usuario LLama a data x su Id
+  obtenerStudentsFiltered() {
+    var student = this.firestore.collection('students').doc('6NpZKQ8HoNZKutp1otdM').valueChanges()
+    return student;
+  }
+
 }

@@ -24,9 +24,10 @@ export class FormComponent implements OnInit {
     this.formulario = this.fb.group({
       dni: new FormControl(data.dni),
       name: new FormControl(data.name),
+      lastName: new FormControl(data.lastName),
       curso: new FormControl(data.curso),
-      id: data.id
-
+      phone: new FormControl(data.phone),
+      isAdmin: false,
     });
 
 

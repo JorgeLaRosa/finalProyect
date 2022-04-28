@@ -9,7 +9,8 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 })
 export class InscriptionComponent implements OnInit {
   inscriptionForm!: FormGroup;
-  courses!: any
+  courses: any[] = [];
+  students: any[] = [];
 
   constructor(private fireService: SchoolZoomService, fb: FormBuilder) {
     this.inscriptionForm = new FormGroup({
@@ -19,10 +20,31 @@ export class InscriptionComponent implements OnInit {
   }
 
   newRegister() {
-    this.fireService.newRegister(this.inscriptionForm.value)
+    this.fireService.newRegister(this.inscriptionForm.value);
+    //de aca dirigir a perfil de alumno
+    console.log(this.inscriptionForm.value)
   }
 
   ngOnInit(): void {
+    this.fireService.getCourses().subscribe((data) => {
+      this.courses = [];
+      data.forEach((i) => this.courses.push(
+        {
+          id: i.payload.doc.id,
+          ...i.payload.doc.data()
+        }
+      ))
+    })
+
+    this.fireService.obtenerStudents().subscribe((data) => {
+      this.students = [];
+      data.forEach((i) => this.students.push(
+        {
+          id: i.payload.doc.id,
+          ...i.payload.doc.data()
+        }
+      ))
+    })
   }
 
 }

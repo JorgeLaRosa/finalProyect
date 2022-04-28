@@ -1,4 +1,4 @@
-<h1 [appHeadersSize]="estilos">Lista de Alumnos Inscriptos</h1>
+<h1>Lista de Alumnos Inscriptos</h1>
 
 <mat-table #tabla [dataSource]="alumnosObservable" class="mat-elevation-z8">
     <!-- Dni Column -->
@@ -11,6 +11,12 @@
     <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
     </ng-container>
 
     <!-- Curso Column -->

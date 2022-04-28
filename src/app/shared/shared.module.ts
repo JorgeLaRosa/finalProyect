@@ -13,7 +13,7 @@ import { HeadersSizeDirective } from './directives/headers-size.directive';
   ],
   exports: [
     MaterialModule,
-    HeadersSizeDirective,
+    //HeadersSizeDirective,
   ]
 })
 export class SharedModule { }

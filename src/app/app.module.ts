@@ -5,12 +5,6 @@ import { CoreModule } from './core/core.module'
 import { AppRoutingModule } from './core/app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
-
-
-
-
-
 // Componentes
 import { AlumnosListComponent } from './components/alumnos-list/alumnos-list.component';
 
@@ -21,8 +15,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { CoursesCreatorComponent } from './components/courses-creator/courses-creator.component';
-
 import { InscriptionComponent } from './components/inscription/inscription.component';
+import { StudentProfileComponent } from './components/student-profile/student-profile.component';
+import { SchoolZoomService } from './core/services/school-zoom.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 
 
@@ -36,6 +34,8 @@ import { InscriptionComponent } from './components/inscription/inscription.compo
     CursosComponent,
     CoursesCreatorComponent,
     InscriptionComponent,
+    StudentProfileComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -44,7 +44,6 @@ import { InscriptionComponent } from './components/inscription/inscription.compo
     FormsModule,
     ReactiveFormsModule,
     CoreModule,
-
 
   ],
   providers: [

@@ -5,8 +5,18 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>Nombre Completo</mat-label>
+        <mat-label>Nombre</mat-label>
         <input #nombre formControlName="name" matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input #nombre formControlName="lastName" matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Telefono</mat-label>
+        <input #nombre formControlName="phone" matInput>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -18,5 +28,5 @@
         </mat-select>
     </mat-form-field>
     <br>
-    <button mat-button color="primary" type="submit">{{buttonLabel}}</button>
+    <button class="form-button" mat-button color="primary" type="submit">{{buttonLabel}}</button>
 </form>

@@ -1,0 +1,15 @@
+.profile-item{
+    display: inline;
+    margin-left: 5px;
+
+    
+}
+
+.mat-card{
+    width: 400px;
+    height: 500px;
+}
+
+p{
+    font-weight: bold;
+}

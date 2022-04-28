@@ -1,5 +1,15 @@
 form{
     padding: 15%;
-    width: 80%;
+    width: 230px;
     border: 1px solid black;
+    margin: auto;
+}  
+
+.form-button{
+margin: auto;
+}
+
+mat-form-field{
+    margin-left: 18px;
+    
 }

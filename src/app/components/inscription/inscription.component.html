@@ -1,13 +1,27 @@
 <div>
     <h1>Inscribirme a</h1>
 
+    <div>
 
+    </div>
 
     <form [formGroup]="inscriptionForm" (ngSubmit)="newRegister()">
 
         <mat-form-field appearance="fill">
-            <mat-label>ID Usuario</mat-label>
-            <input formControlName="studentId" matInput>
+            <mat-label>Curso</mat-label>
+            <mat-select formControlName="courseId">
+                <mat-option *ngFor="let stu of courses" [value]="stu.id">{{stu.title}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Student</mat-label>
+            <mat-select formControlName="studentId">
+                <mat-option *ngFor="let stu of students" [value]="stu.id">{{stu.name}}</mat-option>
+
+            </mat-select>
         </mat-form-field>
 
         <br>
@@ -15,7 +29,4 @@
         <button mat-stroked-button type="submit" color="primary">Finalizar Inscripcion</button>
     </form>
 
-    <div>
-        <p>Id de alumnos 6NpZKQ8HoNZKutp1otdM</p>
-    </div>>
 </div>

@@ -34,6 +34,7 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = [
     "dni",
     "nombre",
+    "lastName",
     "curso",
     "eliminar",
     "editar"
@@ -55,7 +56,6 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
             {
               id: i.payload.doc.id,
               ...i.payload.doc.data()
-
             })
         })
       })

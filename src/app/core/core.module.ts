@@ -11,19 +11,25 @@ import { environment } from '../../environments/environment';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
     CommonModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
-    SchoolZoomService,
+    AngularFirestoreModule,
+    SharedModule,
+
+
+
   ],
   exports: [
     SharedModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+
   ],
   providers: [
-    SchoolZoomService
+    //SchoolZoomService
   ]
 })
 export class CoreModule { }
