@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SchoolZoomService } from '../../core/services/school-zoom.service';
+import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({

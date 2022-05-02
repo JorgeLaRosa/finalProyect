@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable, Subscription } from 'rxjs';
-import { SchoolZoomService } from '../../core/services/school-zoom.service';
+import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 
 
 @Component({

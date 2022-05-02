@@ -8,18 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-
-  frutas: any = "";
-
   constructor() {
-
   }
 
   ngOnInit() {
-
-  }
-
-  abrirDialog() {
-
   }
 }

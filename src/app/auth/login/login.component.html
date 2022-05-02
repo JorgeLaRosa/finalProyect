@@ -1,0 +1,20 @@
+<h1 class="login-title">Ingresa tu Usuario y Contraseña</h1>
+
+<form [formGroup]="logInForm" class="form-div" (ngSubmit)="login()">
+    <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input formControlName="email" matInput>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label>Contrasena</mat-label>
+        <input formControlName="password" matInput>
+    </mat-form-field>
+    <br>
+    <a [routerLink]="['/register']" class="register-title">No tengo cuenta. Registrarme</a>
+    <br>
+    <button mat-stroked-button type="submit">
+        Resgistrame
+    </button>
+
+</form>

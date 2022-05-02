@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { SchoolZoomService } from '../../core/services/school-zoom.service';
+import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 import { InscriptionComponent } from '../inscription/inscription.component';
 
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SchoolZoomService } from '../../core/services/school-zoom.service';
+import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 import { MatTable } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
