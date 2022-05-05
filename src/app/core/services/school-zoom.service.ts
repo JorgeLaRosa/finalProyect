@@ -52,23 +52,23 @@ export class SchoolZoomService {
   //INSCRIPTION Services
   newRegister(data: any) {
     this.firestore.collection('courses').doc(data.courseId).update({
-      enrolledStudents: [...data.studentId]
+      enrolledStudents: [data.studentId]
     })
     this.firestore.collection('students').doc(data.studentId).update({
-      curso: [...data.courseId]
+      curso: [data.courseId],
     })
   }
 
 
   //Perfil Usuario LLama a data x su Id
-  obtenerStudentsFiltered() {
-    var student = this.firestore.collection('students').doc('6NpZKQ8HoNZKutp1otdM').valueChanges()
+  obtenerStudentsFiltered(data: any) {
+    var student = this.firestore.collection('students').doc(data).valueChanges()
     return student;
   }
 
   //LOGIN
-  login(data: any) {
-    return this.user = this.firestore.collection('students'), where("name", "==", "susana")
+  login(user: string, password: any) {
+    //return this.user = this.firestore.collection('students'), where("name", "==", "susana")
 
   }
 

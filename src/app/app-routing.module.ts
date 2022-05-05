@@ -1,20 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CursosComponent } from './students/components/cursos/cursos.component';
-import { AlumnosListComponent } from './admin/components/alumnos-list/alumnos-list.component';
-import { InscriptionComponent } from 'src/app/students/components/inscription/inscription.component';
-import { CoursesCreatorComponent } from 'src/app/admin/components/courses-creator/courses-creator.component';
-import { StudentProfileComponent } from './students/components/student-profile/student-profile.component';
-import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 
 const routes: Routes = [
   {
-    path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    path: 'admin', canActivate: [AuthGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
 
   },
   {
-    path: "alumnos",
+    path: "alumnos", canActivate: [AuthGuard],
     loadChildren: () => import('./students/students.module').then(m => m.StudentsModule)
   },
   {

@@ -1,31 +1,33 @@
 <div>
     <h1>Perfil del usuario: </h1>
 
-    <mat-card class="mat-card">
+    <mat-card class="mat-card" *ngFor="let i of studentData">
         <mat-card-header>
-            <mat-card-title>LASA</mat-card-title>
-            <mat-card-subtitle>estudiante</mat-card-subtitle>
+            <mat-card-title>{{i.name}} {{i.lastName}}</mat-card-title>
+            <mat-card-subtitle *ngIf="!i.isAdmin">Estudiante</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="i.isAdmin">Administrador</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image>
         <div>
             <h3 class="profile-item">Email:</h3>
-            <p class="profile-item">jorejorp@jsdo</p>
+            <p class="profile-item">{{i.email}}</p>
 
         </div>
 
         <div>
             <h3 class="profile-item">Cursos Registrados:</h3>
-            <p class="profile-item">Angular</p>
+            <p *ngIf="i.curso.length == 0" class="profile-item">No hay cursos Registrados</p>
+            <p *ngIf="i.curso != 0" class="profile-item">{{i.curso}}</p>
+
+        </div>
+        <div>
+            <h3 class="profile-item">DNI:</h3>
+            <p class="profile-item">{{i.dni}}</p>
 
         </div>
         <div>
             <h3 class="profile-item">Telefono:</h3>
-            <p class="profile-item">3223-32242</p>
-
-        </div>
-        <div>
-            <h3 class="profile-item">Pais:</h3>
-            <p class="profile-item">Argentina</p>
+            <p class="profile-item">{{i.phone}}</p>
 
         </div>
 

@@ -1,4 +1,9 @@
 <mat-toolbar class="toolbar">
     <div>Escuelita</div>
-    <div> <button [routerLink]="['/login']" mat-stroked-button color="light">Sign In</button></div>
+    <div>
+        <button *ngIf="!activar()" [routerLink]="['/login']" mat-stroked-button color="light">Sign In</button>
+        <button *ngIf="activar()" (click)="logOut()" mat-stroked-button color="light">LogOut</button>
+    </div>
+
+
 </mat-toolbar>

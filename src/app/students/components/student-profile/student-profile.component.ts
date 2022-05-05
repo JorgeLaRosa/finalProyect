@@ -12,19 +12,23 @@ import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 
 export class StudentProfileComponent implements OnInit {
   suscription!: Subscription;
-  studentData!: Observable<any>;
+  studentData: any[] = []
 
   constructor(private fireService: SchoolZoomService) {
-    this.suscription = this.fireService.obtenerStudentsFiltered().subscribe((data: any) => this.studentData = data)
+
 
   }
 
+
   ngOnInit(): void {
+    var currentUserId = JSON.parse(localStorage.getItem('user') || '{}')
+    this.suscription = this.fireService.obtenerStudentsFiltered(currentUserId[0].id).subscribe((data) => {
+      this.studentData.push(data as any)
+    })
+
   }
 
   editStudentProfile() {
-    console.log(this.studentData)
-
   }
 
 }
