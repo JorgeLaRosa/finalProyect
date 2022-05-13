@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { where } from 'firebase/firestore';
+import { where, FieldValue, updateDoc } from 'firebase/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,7 @@ export class SchoolZoomService {
 
 
   constructor(public firestore: AngularFirestore,) {
-
     this.studentObservable = firestore.collection('students').snapshotChanges();
-
     this.coursesObservable = firestore.collection('courses').snapshotChanges();
   }
 
@@ -40,7 +39,6 @@ export class SchoolZoomService {
   }
 
   // COURSES Services
-
   getCourses() {
     return this.coursesObservable
   }
@@ -54,9 +52,9 @@ export class SchoolZoomService {
     this.firestore.collection('courses').doc(data.courseId).update({
       enrolledStudents: [data.studentId]
     })
-    this.firestore.collection('students').doc(data.studentId).update({
-      curso: [data.courseId],
-    })
+    //this.firestore.collection('students').doc(data.studentId).update(
+    //{ curso: firebase.firestore.FieldValue.arrayUnion("hola") }
+    //)
   }
 
 
@@ -68,7 +66,7 @@ export class SchoolZoomService {
 
   //LOGIN
   login(user: string, password: any) {
-    //return this.user = this.firestore.collection('students'), where("name", "==", "susana")
+    // return this.user = this.firestore.collection('students'), whereArrayContains("name", "==", "susana")
 
   }
 

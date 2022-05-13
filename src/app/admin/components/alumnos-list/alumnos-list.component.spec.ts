@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { InjectionToken } from '@angular/core'
 import { AlumnosListComponent } from './alumnos-list.component';
 
 describe('AlumnosListComponent', () => {
@@ -8,9 +8,10 @@ describe('AlumnosListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AlumnosListComponent ]
+      declarations: [AlumnosListComponent],
+      providers: [InjectionToken]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

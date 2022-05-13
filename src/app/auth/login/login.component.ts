@@ -34,14 +34,13 @@ export class LoginComponent implements OnInit {
   login() {
     var user = this.logInForm.value.user;
     var password = this.logInForm.value.password
-    //this.fireService.login(user)
+    //this.fireService.login(user);
 
     var userFilter = this.users.filter(i => i.user == this.logInForm.value.email && i.password == this.logInForm.value.password)
     if (userFilter.length > 0) {
       localStorage.setItem('user', JSON.stringify(userFilter));
       if (userFilter[0].isAdmin == false) {
-        console.log("la concha de la lora")
-        this.router.navigate(['alumnos/perfil'])
+        this.router.navigate(['/alumnos/perfil'])
       } else {
         this.router.navigate(['/admin/cursosCreator'])
       }

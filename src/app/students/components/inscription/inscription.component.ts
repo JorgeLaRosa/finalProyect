@@ -21,8 +21,8 @@ export class InscriptionComponent implements OnInit {
 
   newRegister() {
     this.fireService.newRegister(this.inscriptionForm.value);
-    //de aca dirigir a perfil de alumno
     console.log(this.inscriptionForm.value)
+    //aca agregar alert que doga que estas inscripto
   }
 
   ngOnInit(): void {

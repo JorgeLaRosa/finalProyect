@@ -4,3 +4,7 @@
     background-color: rgb(46, 46, 99);
     color:rgb(235, 180, 29)
 }
+
+.log-btn{
+    border: 1px solid rgb(235, 180, 29);
+}

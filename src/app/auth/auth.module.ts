@@ -13,7 +13,6 @@ import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
-
     LoginComponent,
     RegisterComponent,
   ],
@@ -24,7 +23,7 @@ import { RegisterComponent } from './register/register.component';
 
   ],
   exports: [
-
+    SharedModule
   ]
 
 })

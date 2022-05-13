@@ -3,8 +3,8 @@ import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 import { MatTable } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { FormComponent } from '../form/form.component';
-
+//import { FormComponent } from '../form/form.component';
+import { RegisterComponent } from 'src/app/auth/register/register.component';
 
 export interface Student {
   name: string;
@@ -39,6 +39,7 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
     "eliminar",
     "editar"
   ];
+
   //dataSource es la fuente del Mat Table
   dataSource = this.alumnos;
   dialogRef: any;
@@ -77,7 +78,7 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
   }
 
   abrirDialogEditar(mode: boolean, element: any) {
-    const dialogRef = this.dialog.open(FormComponent, {
+    const dialogRef = this.dialog.open(RegisterComponent, {
       width: '400px',
       data: {
         name: element.name,
@@ -85,8 +86,7 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
         curso: element.curso,
         mode: mode,
         id: element.id
-      },
-
+      }
     });
 
     dialogRef.afterClosed().subscribe(info => {
@@ -99,18 +99,18 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
     })
   }
 
-  abrirDialogInscripcion() {
-    const dialogRef = this.dialog.open(FormComponent, {
-      width: '400px',
-      data: {
-        nombre: '',
-        dni: '',
-        curso: '',
+  // abrirDialogInscripcion() {
+  //   const dialogRef = this.dialog.open(RegisterComponent, {
+  //     width: '400px',
+  //     data: {
+  //       nombre: '',
+  //       dni: '',
+  //       curso: '',
 
 
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
 
   //estilo de Consigna
   estilos: any = {

@@ -31,18 +31,13 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     SidebarComponent,
     ToolbarComponent,
-
-
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    //ReactiveFormsModule,
     CoreModule,
     SharedModule
-
   ],
   providers: [
   ],

@@ -7,6 +7,7 @@ import { FormComponent } from './components/form/form.component';
 import { AdminComponent } from './admin.component';
 import { CoursesCreatorComponent } from './components/courses-creator/courses-creator.component';
 import { AlumnosListComponent } from './components/alumnos-list/alumnos-list.component';
+import { CompartidoComponent } from '../shared/compartido/compartido.component';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { AlumnosListComponent } from './components/alumnos-list/alumnos-list.com
     FormComponent,
     AdminComponent,
     CoursesCreatorComponent,
-    AlumnosListComponent
+    AlumnosListComponent,
 
   ],
   imports: [

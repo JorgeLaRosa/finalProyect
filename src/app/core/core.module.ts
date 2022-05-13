@@ -13,6 +13,7 @@ import { HomeComponent } from '../home/components/home/home.component';
 import { FormComponent } from '../admin/components/form/form.component';
 import { StudentsModule } from '../students/students.module';
 import { AdminModule } from '../admin/admin.module';
+import { CompartidoComponent } from '../shared/compartido/compartido.component';
 
 
 
@@ -35,6 +36,7 @@ import { AdminModule } from '../admin/admin.module';
     SharedModule,
   ],
   providers: [
+    SchoolZoomService
   ]
 })
 export class CoreModule { }

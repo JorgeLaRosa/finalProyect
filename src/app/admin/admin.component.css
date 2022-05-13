@@ -1,0 +1,12 @@
+*{
+    text-decoration: none;
+    color: black;
+}
+mat-sidenav-content{
+    padding: 50px;
+    text-align: center;
+    
+}
+mat-sidenav{
+    background-color: rgb(159, 165, 232);
+}

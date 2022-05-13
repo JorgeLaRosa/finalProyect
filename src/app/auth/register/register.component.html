@@ -1,34 +1,42 @@
-<p>REGIDYEEEERRRR</p>
+<p>REGISTRATE</p>
 
-<!-- <form [formGroup]="formulario" (ngSubmit)="sendForm()">
-    <mat-form-field appearance="fill">
-        <mat-label>Documento</mat-label>
-        <input formControlName="dni" matInput>
-    </mat-form-field>
+<mat-card class="form-box">
 
-    <mat-form-field appearance="fill">
-        <mat-label>Nombre</mat-label>
-        <input #nombre formControlName="name" matInput>
-    </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Apellido</mat-label>
-        <input #nombre formControlName="lastName" matInput>
-    </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Telefono</mat-label>
-        <input #nombre formControlName="phone" matInput>
-    </mat-form-field>
+    <form [formGroup]="formulario" (ngSubmit)="sendForm()">
+        <mat-form-field appearance="fill">
+            <mat-label>Documento</mat-label>
+            <input formControlName="dni" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="name" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Apellido</mat-label>
+            <input formControlName="lastName" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Telefono</mat-label>
+            <input formControlName="phone" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input formControlName="contrasena" matInput>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Select</mat-label>
-        <mat-select formControlName="curso">
-            <mat-option value="angular">Angular</mat-option>
-            <mat-option value="React">React JS</mat-option>
-            <mat-option value="vue">Vue JS</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <br>
-    <button class="form-button" mat-button color="primary" type="submit">{{buttonLabel}}</button>
-</form> -->
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput>
+        </mat-form-field>
+        <br>
+        <button class="form-button" mat-stroked-button color="primary" type="submit">{{buttonLabel}}</button>
+    </form>
+
+</mat-card>
