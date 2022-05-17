@@ -23,10 +23,10 @@ import { CompartidoComponent } from '../shared/compartido/compartido.component';
 
   ],
   imports: [
-    CommonModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AppRoutingModule,
     AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    CommonModule,
+    AppRoutingModule,
     SharedModule,
     AuthModule,
     StudentsModule,

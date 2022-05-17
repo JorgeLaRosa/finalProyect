@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { environment } from 'src/environments/environment';
 
 import { CoursesCreatorComponent } from './courses-creator.component';
 
@@ -8,9 +11,11 @@ describe('CoursesCreatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CoursesCreatorComponent ]
+      imports: [AngularFireModule.initializeApp(environment.firebase)],
+      providers: [AngularFireAuth],
+      declarations: [CoursesCreatorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

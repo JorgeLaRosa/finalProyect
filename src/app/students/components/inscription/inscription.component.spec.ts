@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FormBuilder } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 import { InscriptionComponent } from './inscription.component';
 
@@ -8,9 +12,11 @@ describe('InscriptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InscriptionComponent ]
+      imports: [AngularFireModule.initializeApp(environment.firebase)],
+      providers: [AngularFireAuth, FormBuilder],
+      declarations: [InscriptionComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
