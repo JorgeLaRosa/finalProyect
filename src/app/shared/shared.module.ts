@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
 import { HeadersSizeDirective } from './directives/headers-size.directive';
 import { AngularModule } from './angular/angular.module';
-import { CompartidoComponent } from './compartido/compartido.component';
+
 
 @NgModule({
   declarations: [
-    CompartidoComponent
   ],
   imports: [
     CommonModule,

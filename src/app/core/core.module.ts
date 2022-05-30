@@ -10,17 +10,16 @@ import { AuthModule } from '../auth/auth.module';
 import { LoginComponent } from '../auth/login/login.component';
 import { HomeModule } from '../home/home.module';
 import { HomeComponent } from '../home/components/home/home.component';
-import { FormComponent } from '../admin/components/form/form.component';
+
 import { StudentsModule } from '../students/students.module';
 import { AdminModule } from '../admin/admin.module';
-import { CompartidoComponent } from '../shared/compartido/compartido.component';
+
 
 
 
 
 @NgModule({
   declarations: [
-
   ],
   imports: [
     AngularFirestoreModule,

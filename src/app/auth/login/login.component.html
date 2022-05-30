@@ -8,10 +8,10 @@
     <br>
     <mat-form-field>
         <mat-label>Contrasena</mat-label>
-        <input formControlName="password" matInput>
+        <input type="password" formControlName="password" matInput>
     </mat-form-field>
     <br>
-    <a [routerLink]="['/register']" class="register-title">No tengo cuenta. Registrarme</a>
+    <a (click)="newRegister()" class="register-title">No tengo cuenta. Registrarme</a>
     <br>
     <button mat-stroked-button type="submit">
         Resgistrame

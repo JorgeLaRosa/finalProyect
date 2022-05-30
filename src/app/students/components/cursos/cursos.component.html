@@ -1,6 +1,6 @@
-<div>
-    <h1>Cursos de Programacion</h1>
+<h1>Cursos de Programacion</h1>
 
+<div id="curso-div-gral">
     <mat-card *ngFor="let curso of courses" class="example-card">
         <mat-card-title>{{curso.title}}</mat-card-title>
         <mat-card-subtitle>{{curso.duration}} Semanas de duracion.</mat-card-subtitle>
@@ -9,10 +9,9 @@
         </mat-card-content>
         <mat-card-title>${{curso.price}}</mat-card-title>
         <mat-card-actions>
-            <button mat-stroked-button color="primary" (click)="newInscription()">Inscribirme</button>
+            <button mat-stroked-button color="primary"
+                (click)="newInscription(curso.title, curso.id)">Inscribirme</button>
         </mat-card-actions>
         <mat-card-subtitle>Cantidad de Inscriptos {{curso.enrolledStudents.length}}</mat-card-subtitle>
-
-
     </mat-card>
 </div>

@@ -3,7 +3,8 @@
     color: black;
 }
 mat-sidenav-content{
-    padding: 50px;
+    padding: 10%;
+    height: 100%;
     text-align: center;
     
 }

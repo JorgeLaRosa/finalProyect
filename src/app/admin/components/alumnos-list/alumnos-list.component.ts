@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 import { MatTable } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 //import { FormComponent } from '../form/form.component';
 import { RegisterComponent } from 'src/app/auth/register/register.component';
 
@@ -22,6 +22,7 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
 
   @ViewChild('tabla') table?: MatTable<Student>
 
+
   alumnos: any[] = [];
   dialogData: any;
   alumnosObservable: any[] = [];
@@ -37,12 +38,11 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
     "lastName",
     "curso",
     "eliminar",
-    "editar"
+    "editar",
+    "isAdmin"
   ];
-
   //dataSource es la fuente del Mat Table
   dataSource = this.alumnos;
-  dialogRef: any;
 
 
   constructor(
@@ -62,55 +62,52 @@ export class AlumnosListComponent implements OnInit, OnDestroy {
       })
   }
 
-  createStudent(dialogData: any) {
-    this.studentsService.createNewStudent(dialogData);
-    this.table?.renderRows();
-  }
-
   deleteStudent(studentId: string) {
     this.studentsService.deleteSelectedStudent(studentId)
   }
 
-
   actualizar(dialogData: any) {
     this.studentsService.updateStudent(dialogData)
     this.table?.renderRows()
+
+
   }
 
-  abrirDialogEditar(mode: boolean, element: any) {
-    const dialogRef = this.dialog.open(RegisterComponent, {
+  abrirDialogEditar(editValue: boolean, element: any) {
+    this.dialog.open(RegisterComponent, {
       width: '400px',
       data: {
         name: element.name,
+        lastName: element.lastName,
         dni: element.dni,
-        curso: element.curso,
-        mode: mode,
-        id: element.id
+        courses: element.courses,
+        mail: element.mail,
+        id: element.id,
+        password: element.password,
+        edit: true,
+        isAdmin: false
       }
     });
 
-    dialogRef.afterClosed().subscribe(info => {
-      this.dialogData = info;
-      if (mode == false) {
-        this.createStudent(this.dialogData)
-      } else {
-        this.actualizar(this.dialogData)
-      }
-    })
+
   }
 
-  // abrirDialogInscripcion() {
-  //   const dialogRef = this.dialog.open(RegisterComponent, {
-  //     width: '400px',
-  //     data: {
-  //       nombre: '',
-  //       dni: '',
-  //       curso: '',
+  abrirDialogCrear() {
+    this.dialog.open(RegisterComponent, {
+      width: '400px',
+      data: {
+        name: '',
+        lastName: '',
+        dni: '',
+        mail: '',
+        password: '',
+        courses: '',
+        edit: false,
+        isAdmin: false,
+      }
+    })
 
-
-  //     }
-  //   })
-  // }
+  }
 
   //estilo de Consigna
   estilos: any = {

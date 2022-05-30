@@ -5,7 +5,8 @@ import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 
 
 describe('AlumnosListComponent', () => {
@@ -16,7 +17,8 @@ describe('AlumnosListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AngularFireModule.initializeApp(environment.firebase), MatDialogModule],
       declarations: [AlumnosListComponent],
-      providers: [AngularFireAuth],
+      providers: [AngularFireAuth
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   });

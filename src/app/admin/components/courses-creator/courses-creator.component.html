@@ -1,3 +1,5 @@
+<h1>Formulario para Creacion de Cursos.</h1>
+
 <form [formGroup]="newCourseForm" (ngSubmit)="createNewCourse()">
     <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
@@ -10,7 +12,7 @@
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
-        <mat-label>Duration</mat-label>
+        <mat-label>Duration (en semanas)</mat-label>
         <input formControlName="duration" matInput>
     </mat-form-field>
     <br>
@@ -25,14 +27,14 @@
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
-        <mat-label>Students</mat-label>
+        <mat-label>Enrrolled Students</mat-label>
         <input formControlName="enrolledStudents" matInput>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
         <mat-label>Capacidad de alumnos</mat-label>
-        <input matInput>
+        <input formControlName="maxQuotes" matInput>
     </mat-form-field>
     <br>
-    <button type="submit">Crear Curso</button>
+    <button mat-stroked-button color='primary' type="submit">Crear Curso</button>
 </form>

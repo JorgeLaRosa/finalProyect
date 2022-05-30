@@ -1,41 +1,30 @@
 <div>
     <h1>Perfil del usuario: </h1>
 
-    <mat-card class="mat-card" *ngFor="let i of studentData">
+    <mat-card class="mat-card">
         <mat-card-header>
-            <mat-card-title>{{i.name}} {{i.lastName}}</mat-card-title>
-            <mat-card-subtitle *ngIf="!i.isAdmin">Estudiante</mat-card-subtitle>
-            <mat-card-subtitle *ngIf="i.isAdmin">Administrador</mat-card-subtitle>
+            <mat-card-title>{{studentData.name}}{{studentData.lastName}}</mat-card-title>
+            <mat-card-subtitle *ngIf="!studentData.isAdmin">Estudiante</mat-card-subtitle>
+            <mat-card-subtitle *ngIf="studentData.isAdmin">Administrador</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image>
+
+        <div>
+            <h3 class="profile-item">D.N.I:</h3>
+            <p class="profile-item">{{studentData.dni}}</p>
+        </div>
+
         <div>
             <h3 class="profile-item">Email:</h3>
-            <p class="profile-item">{{i.email}}</p>
-
+            <p class="profile-item">{{studentData.mail}}</p>
         </div>
 
         <div>
-            <h3 class="profile-item">Cursos Registrados:</h3>
-            <p *ngIf="i.curso.length == 0" class="profile-item">No hay cursos Registrados</p>
-            <p *ngIf="i.curso != 0" class="profile-item">{{i.curso}}</p>
-
+            <h3 class="profile-item">Cursos:</h3>
+            <p *ngIf="studentData.courses.length === 0" class="profile-item">No hay cursos Registrados</p>
+            <p *ngIf="studentData.courses != 0" class="profile-item">{{studentData.courses}}</p>
         </div>
-        <div>
-            <h3 class="profile-item">DNI:</h3>
-            <p class="profile-item">{{i.dni}}</p>
-
-        </div>
-        <div>
-            <h3 class="profile-item">Telefono:</h3>
-            <p class="profile-item">{{i.phone}}</p>
-
-        </div>
-
 
         <button mat-stroked-button color="primary" (click)="editStudentProfile()">Editar</button>
 
-
     </mat-card>
-
-
 </div>

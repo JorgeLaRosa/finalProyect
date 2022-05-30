@@ -1,10 +1,6 @@
-<p>REGISTRATE</p>
-
+<h2>{{titleLabel}}</h2>
 <mat-card class="form-box">
-
-
-
-    <form [formGroup]="formulario" (ngSubmit)="sendForm()">
+    <form [formGroup]="formulario">
         <mat-form-field appearance="fill">
             <mat-label>Documento</mat-label>
             <input formControlName="dni" matInput>
@@ -21,22 +17,30 @@
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
-            <mat-label>Telefono</mat-label>
-            <input formControlName="phone" matInput>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
-            <input formControlName="contrasena" matInput>
+            <input formControlName="password" matInput>
         </mat-form-field>
-
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input formControlName="email" matInput>
+            <input formControlName="mail" matInput>
         </mat-form-field>
         <br>
-        <button class="form-button" mat-stroked-button color="primary" type="submit">{{buttonLabel}}</button>
+        <mat-form-field appearance="fill">
+            <mat-label>Cursos</mat-label>
+            <input formControlName="courses" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field *ngIf='isAdminValue' appearance="fill">
+            <mat-label>IsAdmin</mat-label>
+            <mat-select formControlName="isAdmin">
+                <mat-option [value]="false">false</mat-option>
+                <mat-option [value]="true">true</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <button class="form-button" mat-stroked-button color="primary" type="submit"
+            (click)="enviarForm()">{{buttonLabel}}</button>
     </form>
 
 </mat-card>

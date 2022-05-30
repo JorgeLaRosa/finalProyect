@@ -1,5 +1,16 @@
+#curso-div-gral{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;  
+}
+
 mat-card{
+    padding-top: 10px;
     width: 300px;
     height: 250px;
     margin:20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(243, 243, 243);
 }

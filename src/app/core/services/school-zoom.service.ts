@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { where, FieldValue, updateDoc } from 'firebase/firestore';
+import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 
 
 @Injectable({
@@ -25,17 +26,20 @@ export class SchoolZoomService {
     return this.studentObservable;
   }
 
-  createNewStudent(newStudentData: any) {
-    this.firestore.collection('students').add(newStudentData)
-  }
-
   deleteSelectedStudent(studentId: string) {
     this.firestore.collection('students').doc(studentId).delete()
   }
 
+  createNewStudent(newStudentData: any) {
+    delete newStudentData.id
+    this.firestore.collection('students').add(newStudentData)
+  }
+
   updateStudent(studentData: any) {
+    var studentId = studentData.id;
     delete studentData.id
-    this.firestore.collection('students').doc(studentData.id).update(studentData)
+    console.log('ESTES ES: ', studentData);
+    this.firestore.collection('students').doc(studentId).update(studentData)
   }
 
   // COURSES Services
@@ -47,14 +51,24 @@ export class SchoolZoomService {
     this.firestore.collection('courses').add(data)
   }
 
+  deleteSelectedCourse(id: string) {
+    this.firestore.collection('courses').doc(id).delete()
+  }
+
+  updateSelectedCourse(courseData: any) {
+    var courseId = courseData.id;
+    delete courseData.id
+    this.firestore.collection('courses').doc(courseId).update(courseData)
+  }
+
   //INSCRIPTION Services
-  newRegister(data: any) {
-    this.firestore.collection('courses').doc(data.courseId).update({
-      enrolledStudents: [data.studentId]
+  newRegister(courseId: string, studentId: string, course: string[]) {
+    //var coursesArray = [...course, courseId];
+
+    this.firestore.collection('courses').doc(courseId).update({
+      enrolledStudents: [studentId]
     })
-    //this.firestore.collection('students').doc(data.studentId).update(
-    //{ curso: firebase.firestore.FieldValue.arrayUnion("hola") }
-    //)
+    this.firestore.collection('students').doc(studentId).update({ courses: [courseId] });
   }
 
 
@@ -66,8 +80,6 @@ export class SchoolZoomService {
 
   //LOGIN
   login(user: string, password: any) {
-    // return this.user = this.firestore.collection('students'), whereArrayContains("name", "==", "susana")
-
   }
 
 }

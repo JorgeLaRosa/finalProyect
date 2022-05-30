@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { SchoolZoomService } from 'src/app/core/services/school-zoom.service';
+import { User } from 'src/app/models/user.interface';
+import { AppState } from 'src/app/state/app.state';
+import { sessionSelector } from 'src/app/state/selectors/login.selector';
 
 
 @Component({
@@ -9,40 +15,55 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class RegisterComponent implements OnInit {
 
-  newStudent: any = {}
-  student: any = ""
   formulario!: FormGroup;
   buttonLabel: string = "Enviar";
-  id!: string
+  titleLabel: string = "Nuevo Registro"
+  editValue!: boolean;
+  isAdminValue!: boolean;
 
-  constructor(private fb: FormBuilder) {
-    this.formulario = this.fb.group({
-      dni: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      curso: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      contrasena: new FormControl('', Validators.required),
-      isAdmin: false,
+  constructor(
+    private fb: FormBuilder,
+    private fireService: SchoolZoomService,
+    @Inject(MAT_DIALOG_DATA) data: User,
+    private store: Store<AppState>
+  ) {
+
+    this.store.select(sessionSelector).subscribe(state => {
+      this.isAdminValue = state.currentUser.isAdmin;
     })
+
+    console.log(data);
+    this.formulario = this.fb.group({
+      id: data.id,
+      name: new FormControl(data.name, Validators.required),
+      lastName: new FormControl(data.lastName, Validators.required),
+      dni: new FormControl(data.dni, Validators.required),
+      courses: [data.courses],
+      mail: new FormControl(data.mail, Validators.required),
+      password: new FormControl(data.password, Validators.required),
+      isAdmin: new FormControl(data.isAdmin, Validators.required)
+    })
+    this.editValue = data.edit;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.checkValue()
+  }
 
-  //constructor(    
-  //public dialogRef: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) data: any) {
+  checkValue() {
+    if (this.editValue === true) {
+      this.buttonLabel = "Editar";
+      this.titleLabel = "Editar Usuario"
+    }
+  }
 
-  //ButtonValue
-  //   if (data.mode == true) {
-  //     this.buttonLabel = "Editar"
-  //   } else {
-  //     this.buttonLabel = "Inscribirse"
-  //   }
-  // }
-
-  sendForm() {
-    // this.dialogRef.close(this.formulario.value)
+  enviarForm() {
+    //console.log(this.formulario.value)
+    if (this.editValue == true) {
+      this.fireService.updateStudent(this.formulario.value)
+    } else {
+      this.fireService.createNewStudent(this.formulario.value)
+    }
   }
 
 }

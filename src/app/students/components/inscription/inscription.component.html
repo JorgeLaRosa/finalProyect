@@ -1,28 +1,5 @@
 <div>
-    <h1>Inscribirme a</h1>
-
-    <form [formGroup]="inscriptionForm" (ngSubmit)="newRegister()">
-
-        <mat-form-field appearance="fill">
-            <mat-label>Curso</mat-label>
-            <mat-select formControlName="courseId">
-                <mat-option *ngFor="let stu of courses" [value]="stu.id">{{stu.title}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <br>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Student</mat-label>
-            <mat-select formControlName="studentId">
-                <mat-option *ngFor="let stu of students" [value]="stu.id">{{stu.name}}</mat-option>
-
-            </mat-select>
-        </mat-form-field>
-
-        <br>
-
-        <button mat-stroked-button type="submit" color="primary">Finalizar Inscripcion</button>
-    </form>
-
+    <h1>Felicitaciones! {{student.name}} {{student.lastName}}</h1>
+    <h2>Estas por inscribirte a {{course}}</h2>
+    <button (click)="newEnrollRegister()" mat-stroked-button color="primary"> Finalizar Inscripcion</button>
 </div>

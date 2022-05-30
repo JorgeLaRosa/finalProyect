@@ -4,9 +4,10 @@ mat-sidenav-container{
 mat-sidenav{
     width: 20%;
     height: 100%;
-    background-color: rgb(234, 232, 232);
+    background-color: rgb(159, 165, 232);
 }
 
 mat-sidenav-content{
     padding: 30px;
+     background-color: rgb(159, 165, 232);
 }

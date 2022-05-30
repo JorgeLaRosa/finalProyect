@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Store, select } from '@ngrx/store';
 import { SchoolZoomService } from 'src/app/core/services/school-zoom.service';
-import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { User } from 'src/app/models/user.interface';
+import { AppState } from 'src/app/state/app.state';
+import { activeSessionSelector, sessionSelector } from 'src/app/state/selectors/login.selector';
+//import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-inscription',
@@ -8,43 +13,29 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
   styleUrls: ['./inscription.component.css']
 })
 export class InscriptionComponent implements OnInit {
-  inscriptionForm!: FormGroup;
-  courses: any[] = [];
-  students: any[] = [];
+  course!: string;
+  courseId!: string;
+  student!: User;
 
-  constructor(private fireService: SchoolZoomService, fb: FormBuilder) {
-    this.inscriptionForm = new FormGroup({
-      courseId: new FormControl(''),
-      studentId: new FormControl('')
+  constructor(
+    private fireService: SchoolZoomService,
+    @Inject(MAT_DIALOG_DATA) public data: { title: string, courseId: string },
+    private store: Store<AppState>) {
+    this.store.select(sessionSelector).subscribe(state => {
+      this.student = state.currentUser;
     });
+    this.course = data.title
+    this.courseId = data.courseId
   }
 
-  newRegister() {
-    this.fireService.newRegister(this.inscriptionForm.value);
-    console.log(this.inscriptionForm.value)
+  newEnrollRegister() {
+    this.fireService.newRegister(this.courseId, this.student.id, this.student.courses);
+    alert("Felicitaciones!! Estas inscriptio al curso!")
     //aca agregar alert que doga que estas inscripto
   }
 
   ngOnInit(): void {
-    this.fireService.getCourses().subscribe((data) => {
-      this.courses = [];
-      data.forEach((i) => this.courses.push(
-        {
-          id: i.payload.doc.id,
-          ...i.payload.doc.data()
-        }
-      ))
-    })
-
-    this.fireService.obtenerStudents().subscribe((data) => {
-      this.students = [];
-      data.forEach((i) => this.students.push(
-        {
-          id: i.payload.doc.id,
-          ...i.payload.doc.data()
-        }
-      ))
-    })
   }
+
 
 }

@@ -1,9 +1,14 @@
 <mat-toolbar class="toolbar">
-    <div>Escuelita</div>
+    <div>ESCUELITA</div>
     <div>
         <button class="log-btn" *ngIf="!activar()" [routerLink]="['/login']" mat-stroked-button color="light">Sign
             In</button>
-        <button class="log-btn" *ngIf="activar()" (click)="logOut()" mat-stroked-button color="light">LogOut</button>
+        <div>
+            <p id="userName" *ngIf="userName">{{userName}}</p>
+            <button class="log-btn" *ngIf="activar()" (click)="logOut()" mat-stroked-button
+                color="light">LogOut</button>
+        </div>
+
     </div>
 
 

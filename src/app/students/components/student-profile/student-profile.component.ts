@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
+import { RegisterComponent } from 'src/app/auth/register/register.component';
 import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 //import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -12,23 +14,27 @@ import { SchoolZoomService } from '../../../core/services/school-zoom.service';
 
 export class StudentProfileComponent implements OnInit {
   suscription!: Subscription;
-  studentData: any[] = []
-
-  constructor(private fireService: SchoolZoomService) {
-
-
+  studentData!: any;
+  constructor(private fireService: SchoolZoomService, public dialog: MatDialog) {
   }
-
 
   ngOnInit(): void {
     var currentUserId = JSON.parse(localStorage.getItem('user') || '{}')
-    this.suscription = this.fireService.obtenerStudentsFiltered(currentUserId[0].id).subscribe((data) => {
-      this.studentData.push(data as any)
-    })
 
+    setTimeout(() => {
+      this.suscription = this.fireService.obtenerStudentsFiltered(currentUserId[0].id).subscribe((data) => {
+        this.studentData = data
+        this.studentData = { ...this.studentData, edit: true, id: currentUserId[0].id }
+      })
+    }, 1000);
   }
 
   editStudentProfile() {
-  }
 
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      width: '450px',
+      data: this.studentData,
+    })
+
+  }
 }

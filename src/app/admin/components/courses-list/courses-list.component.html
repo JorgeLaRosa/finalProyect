@@ -1,0 +1,63 @@
+<div>
+    <h1>Lista de Cursos</h1>
+    <button (click)='createNewCourse()' mat-stroked-button color="primary">Crear Curso</button>
+    <mat-table #tabla [dataSource]="courses" class="mat-elevation-z8">
+        <!-- Name Column -->
+        <ng-container matColumnDef="Nombre">
+            <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Subtitle">
+            <mat-header-cell *matHeaderCellDef> Subtitle </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.subtitle}} </mat-cell>
+        </ng-container>
+
+        <!-- Duracion Column -->
+        <ng-container matColumnDef="Duracion">
+            <mat-header-cell *matHeaderCellDef> Duracion </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.duration}} Semanas</mat-cell>
+        </ng-container>
+
+        <!-- Precio Column -->
+        <ng-container matColumnDef="Precio">
+            <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+            <mat-cell *matCellDef="let element"> $ {{element.price}} </mat-cell>
+        </ng-container>
+
+
+        <!-- Eliminar Column -->
+        <ng-container matColumnDef="Eliminar">
+            <mat-header-cell *matHeaderCellDef>Eliminar</mat-header-cell>
+            <mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
+                    (click)="deleteCourse(element.id)">Eliminar</button></mat-cell>
+        </ng-container>
+
+        <!-- Editar Column -->
+        <ng-container matColumnDef="Editar">
+            <mat-header-cell *matHeaderCellDef>Editar</mat-header-cell>
+            <mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
+                    (click)="editCourse(element)">Editar</button></mat-cell>
+        </ng-container>
+
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+
+        </mat-row>
+
+    </mat-table>
+    <!-- <button mat-stroked-button (click)="abrirDialogEditar(false, '')">Inscribirse</button> -->
+
+
+    <!-- async json -->
+    <!-- <h3>Observable con Pipe ASYNC (Filtrado por ID > 2)</h3>
+<div>{{studentsFiltered$ | async | json}}</div> -->
+
+    <!-- Seccion de promesa -->
+
+    <!-- <h3>Promesa desde Servicio</h3>
+<div *ngFor="let i of studentsP">{{i.nombre}} {{i.curso}} {{i.dni}}</div> -->
+</div>
